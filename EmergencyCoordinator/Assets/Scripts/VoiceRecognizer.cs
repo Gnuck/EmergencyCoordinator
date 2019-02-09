@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HoloToolkit.Unity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -51,6 +52,11 @@ public class VoiceRecognizer : MonoBehaviour
             NodeSpawner.Instance.SpawnNode();
         });
 
+        _keywords.Add("Clear Anchors", () =>
+         {
+             WorldAnchorManager.Instance.AnchorStore.Clear();
+             TextToSpeechManager.Instance.ClearingAnchors();
+         });
 
         //Create the keyword recognizer 
         keywordRecognizer = new KeywordRecognizer(_keywords.Keys.ToArray());

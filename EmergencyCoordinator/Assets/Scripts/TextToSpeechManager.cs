@@ -68,6 +68,17 @@ public class TextToSpeechManager : MonoBehaviour
         textToSpeech.StartSpeaking(msg);
     }
 
+    internal void ClearingAnchors()
+    {
+        string speakText = "Clearing Anchors Complete";
+        //Create message
+        var msg = string.Format(
+            speakText, textToSpeech.Voice.ToString());
+
+        //speak message
+        textToSpeech.StartSpeaking(msg);
+    }
+
     internal void WaitingToProcessMesh()
     {
         string speakText = "Generating planes, reprocess in five seconds";
