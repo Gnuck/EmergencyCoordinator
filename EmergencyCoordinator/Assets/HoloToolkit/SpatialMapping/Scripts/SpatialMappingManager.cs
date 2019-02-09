@@ -26,7 +26,7 @@ namespace HoloToolkit.Unity.SpatialMapping
 
         [Tooltip("Determines if the surface observer should be automatically started.")]
         [SerializeField]
-        private bool autoStartObserver = true;
+        private bool autoStartObserver = false;
 
         [Tooltip("Determines if spatial mapping data will be rendered.")]
         [SerializeField]
