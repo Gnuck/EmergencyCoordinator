@@ -6,6 +6,7 @@ using UnityEngine;
 #if UNITY_WSA
 using System;
 using System.Collections.Generic;
+using UnityEngine.UI;
 #if UNITY_2017_2_OR_NEWER
 using UnityEngine.XR.WSA;
 using UnityEngine.XR.WSA.Persistence;
@@ -26,10 +27,11 @@ namespace HoloToolkit.Unity
     /// </summary>
     public class WorldAnchorManager : Singleton<WorldAnchorManager>
     {
+        
         /// <summary>
         /// Debug text for displaying information.
         /// </summary>
-        public TextMesh AnchorDebugText;
+        public Text AnchorDebugText;
 
         /// <summary>
         /// Enables detailed logs in console window.

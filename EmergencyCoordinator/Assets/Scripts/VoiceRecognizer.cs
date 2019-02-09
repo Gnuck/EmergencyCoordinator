@@ -46,6 +46,11 @@ public class VoiceRecognizer : MonoBehaviour
             TextToSpeechManager.Instance.OnTest();
         });
 
+        _keywords.Add("Node", () =>
+        {
+            NodeSpawner.Instance.SpawnNode();
+        });
+
 
         //Create the keyword recognizer 
         keywordRecognizer = new KeywordRecognizer(_keywords.Keys.ToArray());
