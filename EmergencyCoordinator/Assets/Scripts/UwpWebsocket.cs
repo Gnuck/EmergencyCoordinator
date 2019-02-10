@@ -82,7 +82,7 @@ namespace WebSocketSharp
 
 		public WebSocket(string Url)
 		{
-			Debug.Log("UwpWebSocket::Constructor()");
+			//Debug.Log("UwpWebSocket::Constructor()");
 			url = TryGetUri( Url );
 			socket = new MessageWebSocket();
 			socket.MessageReceived += OnMessageRecieved;
@@ -205,7 +205,7 @@ namespace WebSocketSharp
 
 		public void ConnectAsync ()
 		{
-			Debug.Log("UwpWebSocket::ConnectAsync()");
+			//Debug.Log("UwpWebSocket::ConnectAsync()");
 
 			StartAsync();
 		}
@@ -260,7 +260,7 @@ namespace WebSocketSharp
 
 		async Task StartAsync()
 		{
-			Debug.Log("UwpWebSocket::StartAsync()");
+			//Debug.Log("UwpWebSocket::StartAsync()");
 
 			/*
 			// If we are connecting to wss:// endpoint, by default, the OS performs validation of
@@ -292,12 +292,13 @@ namespace WebSocketSharp
 
 			try
 			{
-				Debug.Log("UwpWebSocket::StartAsync() Trying to connect");
+				//Debug.Log("UwpWebSocket::StartAsync() Trying to connect");
 				await socket.ConnectAsync(url);
 			}
 			catch (Exception ex) // For debugging
 			{
 				Debug.Log("UwpWebSocket::StartAsync() Caught exception");
+                Debug.Log(ex.Message);
 				socket.Dispose();
 				socket = null;
 
@@ -306,7 +307,7 @@ namespace WebSocketSharp
 				return;
 			}
 			
-			Debug.Log("UwpWebSocket::Invoking OnOpen Event");
+			//Debug.Log("UwpWebSocket::Invoking OnOpen Event");
 			OnOpen.Invoke( this, null );
 		}
 			/*

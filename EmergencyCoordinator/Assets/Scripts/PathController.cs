@@ -19,6 +19,7 @@ public class PathController : MonoBehaviour {
 		
 	}
 
+    //find the node closest to the HMD/ user
     public GameObject FindClosestNode()
     {
         var userPos = transform.position;
@@ -42,9 +43,13 @@ public class PathController : MonoBehaviour {
         return closestNode;
     }
 
-    void RouteToNode()
-    {
+    //void RouteToNode(GameObject startNode, GameObject endNode)
+    //{
+       // string startName = startNode.name;
+        //Dictionary<string, float> dict = new Dictionary<string, float>();
+        //List<GameObject> unvisitedNodes = new List<GameObject>(nodeNetwork);
+        //GameObject currentNode = unvisitedNodes.Find()
 
-    }
+    //}
 
 }

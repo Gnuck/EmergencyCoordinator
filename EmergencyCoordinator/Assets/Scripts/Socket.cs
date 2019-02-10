@@ -8,10 +8,9 @@ public class Socket : MonoBehaviour
 {
 
     private WebSocket ws;
-    public Text socketText;
+    //public Text socketText;
     private void Start()
     {
-        Debug.Log("Socket::Start()");
         ws = new WebSocket("ws://emergency-websocket.herokuapp.com");
 
         ws.OnOpen += (sender, e) => {
@@ -21,7 +20,8 @@ public class Socket : MonoBehaviour
         ws.OnMessage += (sender, e) => {
           Debug.Log("Socket::OnMessage -- Got message");
           Debug.Log(e.Data);
-
+            //socketText = GameObject.Find("Canvas/SocketText").GetComponent<Text>();
+            //socketText.text = (string) e.Data;
         };
 
         ws.ConnectAsync();

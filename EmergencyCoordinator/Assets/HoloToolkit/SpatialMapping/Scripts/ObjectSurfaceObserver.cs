@@ -39,7 +39,7 @@ namespace HoloToolkit.Unity.SpatialMapping
         {
             if (roomModel == null)
             {
-                Debug.Log("No room model specified.");
+                //Debug.Log("No room model specified.");
                 return;
             }
 

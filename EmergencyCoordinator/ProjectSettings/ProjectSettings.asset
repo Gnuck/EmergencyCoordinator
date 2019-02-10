@@ -573,7 +573,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0094f9a155dfd501
   metroApplicationDescription: EmergencyCoordinator
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: EmergencyCoordinator
   metroCommandLineArgsFile: 
   metroTileShowName: 0
   metroMediumTileShowName: 0
@@ -587,30 +587,30 @@ PlayerSettings:
   metroSplashScreenUseBackgroundColor: 0
   platformCapabilities:
     WindowsStoreApps:
-      AllJoyn: False
-      BlockedChatMessages: False
-      Bluetooth: False
-      Chat: False
-      CodeGeneration: False
-      EnterpriseAuthentication: False
-      HumanInterfaceDevice: False
-      InputInjectionBrokered: False
-      InternetClient: False
-      InternetClientServer: False
+      AllJoyn: True
+      BlockedChatMessages: True
+      Bluetooth: True
+      Chat: True
+      CodeGeneration: True
+      EnterpriseAuthentication: True
+      HumanInterfaceDevice: True
+      InputInjectionBrokered: True
+      InternetClient: True
+      InternetClientServer: True
       Location: True
       Microphone: True
-      MusicLibrary: False
-      Objects3D: False
-      PhoneCall: False
-      PicturesLibrary: False
+      MusicLibrary: True
+      Objects3D: True
+      PhoneCall: True
+      PicturesLibrary: True
       PrivateNetworkClientServer: True
-      Proximity: False
-      RemovableStorage: False
-      SharedUserCertificates: False
+      Proximity: True
+      RemovableStorage: True
+      SharedUserCertificates: True
       SpatialPerception: True
-      UserAccountInformation: False
-      VideosLibrary: False
-      VoipCall: False
+      UserAccountInformation: True
+      VideosLibrary: True
+      VoipCall: True
       WebCam: True
   metroFTAName: 
   metroFTAFileTypes: []

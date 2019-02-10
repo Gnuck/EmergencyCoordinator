@@ -55,8 +55,13 @@ public class VoiceRecognizer : MonoBehaviour
 
         _keywords.Add("Clear Anchors", () =>
          {
-             WorldAnchorManager.Instance.AnchorStore.Clear();
+             //WorldAnchorManager.Instance.RemoveAllAnchors();
              TextToSpeechManager.Instance.ClearingAnchors();
+             List<GameObject> nodes = GetComponent<PathController>().nodeNetwork;
+             foreach(GameObject node in nodes)
+             {
+                 Destroy(node);
+             }
          });
 
         _keywords.Add("Next Node", () =>
@@ -64,8 +69,13 @@ public class VoiceRecognizer : MonoBehaviour
             TextToSpeechManager.Instance.FindingClosestNode();
             GameObject closeNode = GetComponent<PathController>().FindClosestNode();
             DirectionalIndicator.GetComponent<PointToNode>().AssignTarget(closeNode);
-
         });
+
+        _keywords.Add("Print something", () =>
+        {
+            Debug.Log("asdf");
+        });
+
 
         //Create the keyword recognizer 
         keywordRecognizer = new KeywordRecognizer(_keywords.Keys.ToArray());

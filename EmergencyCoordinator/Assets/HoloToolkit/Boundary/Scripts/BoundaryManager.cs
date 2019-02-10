@@ -276,7 +276,7 @@ namespace HoloToolkit.Unity.Boundary
             }
             else
             {
-                Debug.Log("TryGetGeometry returned false.");
+                //Debug.Log("TryGetGeometry returned false.");
             }
         }
 #endif

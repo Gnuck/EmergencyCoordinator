@@ -16,6 +16,7 @@ public class PointToNode : MonoBehaviour {
         if (!(targetNode == null))
         {
             transform.LookAt(targetNode.transform);
+            transform.eulerAngles.Set(0f,transform.rotation.y,0f);
         }
 	}
 

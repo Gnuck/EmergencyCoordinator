@@ -7,7 +7,6 @@ public class AttachSocket : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 #if WINDOWS_UWP
-        Debug.Log("AttachSocket::Start()");
             gameObject.AddComponent<Socket>();
 #endif
     }
