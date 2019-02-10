@@ -57,7 +57,7 @@ namespace WebSocketSharp
 				return ( RawData == null ) ? Opcode.TEXT : Opcode.BINARY;
 			}
 		}
-		
+
 		public MessageEventArgs(string data)
 		{
 			this.Data = data;
@@ -67,7 +67,7 @@ namespace WebSocketSharp
 		{
 			this.RawData = data;
 		}
-		
+
 	}
 
 
@@ -77,11 +77,12 @@ namespace WebSocketSharp
 		Uri					url;
 		DataWriter			MessageWriter;
 		System.Threading.Mutex	SendLock;
-		
+
 		//	one shared data writer;	http://stackoverflow.com/a/39653730
 
 		public WebSocket(string Url)
 		{
+			Debug.Log("UwpWebSocket::Constructor()");
 			url = TryGetUri( Url );
 			socket = new MessageWebSocket();
 			socket.MessageReceived += OnMessageRecieved;
@@ -89,7 +90,7 @@ namespace WebSocketSharp
 			MessageWriter = new DataWriter( socket.OutputStream );
 			SendLock = new System.Threading.Mutex();
 		}
-	
+
 		public event EventHandler<CloseEventArgs> OnClose;
 		public event EventHandler<ErrorEventArgs> OnError;
 		public event EventHandler<MessageEventArgs> OnMessage;
@@ -105,6 +106,8 @@ namespace WebSocketSharp
 
 		void OnMessageRecieved(MessageWebSocket FromSocket, MessageWebSocketMessageReceivedEventArgs InputMessage)
 		{
+			Debug.Log("UwpWebSocket::OnMessageRecieved()");
+
 			MessageEventArgs OutputMessage = null;
 
 			if (InputMessage.MessageType == SocketMessageType.Utf8)
@@ -118,13 +121,16 @@ namespace WebSocketSharp
 				//	todo!
 				//OutputMessage = new MessageEventArgs( InputMessage.GetDataStream().ReadAsync );
 			}
-			
+
+			Debug.Log("UwpWebSocket::Invoking OnMessage Event");
 			OnMessage.Invoke( this, OutputMessage );
 		}
 
-	
+
 		async Task	SendAsyncTask(string message)
 		{
+			Debug.Log("UwpWebSocket::SendAsyncTask()");
+
 			//	"flush before changing type"
 			await MessageWriter.FlushAsync();
 			socket.Control.MessageType = SocketMessageType.Utf8;
@@ -143,6 +149,8 @@ namespace WebSocketSharp
 
 		public void Send(string data)
 		{
+			Debug.Log("UwpWebSocket::Send()");
+
 			lock(SendLock)
 			{
 				var SendTask = SendAsyncTask( data );
@@ -161,6 +169,8 @@ namespace WebSocketSharp
 
 		public void SendAsync(string data, System.Action<bool> completed)
 		{
+			Debug.Log("UwpWebSocket::SendAsync()");
+
 			ThreadPool.RunAsync( (Handler)=>
 			{
 				lock(SendLock)
@@ -187,19 +197,23 @@ namespace WebSocketSharp
 				};
 				//await Send_Async(data);
 			});
-			
-			
+
+
 			//completed.Invoke(true);
 		}
-		
-		
+
+
 		public void ConnectAsync ()
 		{
+			Debug.Log("UwpWebSocket::ConnectAsync()");
+
 			StartAsync();
 		}
 
 		public void Close()
 		{
+			Debug.Log("UwpWebSocket::Close()");
+
 			if (socket != null)
 			{
 				try
@@ -216,19 +230,22 @@ namespace WebSocketSharp
 
 		void OnClosed(IWebSocket Socket,WebSocketClosedEventArgs Event)
 		{
+			Debug.Log("UwpWebSocket::OnClosed()");
+
+
 		}
 
 		void OnRecvData(byte[] Data)
 		{
 
 		}
-	
+
 		static System.Uri TryGetUri(string uriString)
 		{
 			Uri webSocketUri;
 			if (!Uri.TryCreate(uriString.Trim(), UriKind.Absolute, out webSocketUri))
 				throw new System.Exception("Error: Invalid URI");
-		
+
 			// Fragments are not allowed in WebSocket URIs.
 			if (!String.IsNullOrEmpty(webSocketUri.Fragment))
         		throw new System.Exception("Error: URI fragments not supported in WebSocket URIs.");
@@ -243,7 +260,9 @@ namespace WebSocketSharp
 
 		async Task StartAsync()
 		{
-			/*	
+			Debug.Log("UwpWebSocket::StartAsync()");
+
+			/*
 			// If we are connecting to wss:// endpoint, by default, the OS performs validation of
 			// the server certificate based on well-known trusted CAs. We can perform additional custom
 			// validation if needed.
@@ -273,10 +292,12 @@ namespace WebSocketSharp
 
 			try
 			{
+				Debug.Log("UwpWebSocket::StartAsync() Trying to connect");
 				await socket.ConnectAsync(url);
 			}
 			catch (Exception ex) // For debugging
 			{
+				Debug.Log("UwpWebSocket::StartAsync() Caught exception");
 				socket.Dispose();
 				socket = null;
 
@@ -284,6 +305,8 @@ namespace WebSocketSharp
 				OnError.Invoke( this, new ErrorEventArgs(ex.Message) );
 				return;
 			}
+			
+			Debug.Log("UwpWebSocket::Invoking OnOpen Event");
 			OnOpen.Invoke( this, null );
 		}
 			/*
@@ -307,7 +330,7 @@ namespace WebSocketSharp
 
 					//	gr: work out where messages split!
 					int BytesRead = await readStream.ReadAsync(readBuffer, 0, readBuffer.Length);
-				
+
 					// Do something with the data.
 					// This sample merely reports that the data was received.
 					var PartBuffer = new byte[BytesRead];

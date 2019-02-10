@@ -11,16 +11,17 @@ public class Socket : MonoBehaviour
     public Text socketText;
     private void Start()
     {
-        Debug.Log("socket started");
+        Debug.Log("Socket::Start()");
         ws = new WebSocket("ws://emergency-websocket.herokuapp.com");
 
         ws.OnOpen += (sender, e) => {
-            Debug.Log("Connected to websocket");
+            Debug.Log("Socket::OnOpen -- Connected to websocket");
         };
 
         ws.OnMessage += (sender, e) => {
-            Debug.Log(e.Data);
-            
+          Debug.Log("Socket::OnMessage -- Got message");
+          Debug.Log(e.Data);
+
         };
 
         ws.ConnectAsync();
