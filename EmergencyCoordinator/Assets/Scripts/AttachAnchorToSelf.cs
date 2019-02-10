@@ -7,7 +7,7 @@ public class AttachAnchorToSelf : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        AttachWorldAnchor();
+        
 	}
 	
 	// Update is called once per frame

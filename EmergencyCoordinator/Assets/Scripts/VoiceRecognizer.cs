@@ -38,7 +38,7 @@ public class VoiceRecognizer : MonoBehaviour
     /// </summary>
     void Start()
     {
-        _keywords.Add("Reset", () =>
+        _keywords.Add("Reset Hard", () =>
         {
             TextToSpeechManager.Instance.ResetCalled();
         });
@@ -55,7 +55,7 @@ public class VoiceRecognizer : MonoBehaviour
 
         _keywords.Add("Clear Anchors", () =>
          {
-             //WorldAnchorManager.Instance.RemoveAllAnchors();
+             WorldAnchorManager.Instance.RemoveAllAnchors();
              TextToSpeechManager.Instance.ClearingAnchors();
              List<GameObject> nodes = GetComponent<PathController>().nodeNetwork;
              foreach(GameObject node in nodes)
@@ -64,11 +64,21 @@ public class VoiceRecognizer : MonoBehaviour
              }
          });
 
-        _keywords.Add("Next Node", () =>
+        _keywords.Add("Current Node", () =>
         {
             TextToSpeechManager.Instance.FindingClosestNode();
             GameObject closeNode = GetComponent<PathController>().FindClosestNode();
             DirectionalIndicator.GetComponent<PointToNode>().AssignTarget(closeNode);
+        });
+
+        _keywords.Add("Target Node 0", () =>
+        {
+            var pc = GetComponent<PathController>();
+            var closeNode = pc.FindClosestNode();
+
+            var endNode = pc.nodeNetwork.Find(x => x.name =="node0");
+            var searchList = pc.SearchAllRoutes(closeNode, endNode);
+            pc.InitPath(searchList);
         });
 
         _keywords.Add("Print something", () =>

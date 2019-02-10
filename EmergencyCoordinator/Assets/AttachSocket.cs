@@ -5,9 +5,12 @@ using UnityEngine;
 public class AttachSocket : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 #if WINDOWS_UWP
-            gameObject.AddComponent<Socket>();
+        var testWebSocket = new TestWebSocket();
+        testWebSocket.Start();
+        //gameObject.AddComponent<Socket>();
+        //socket.Send("sup");
 #endif
     }
 

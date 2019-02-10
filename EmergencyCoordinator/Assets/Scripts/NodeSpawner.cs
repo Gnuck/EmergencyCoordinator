@@ -9,6 +9,8 @@ public class NodeSpawner : MonoBehaviour {
 
     public GameObject Node;
 
+    public List<GameObject> nodes;
+
     private static int nodeNumber = 0;
     
 	// Use this for initialization
@@ -23,9 +25,11 @@ public class NodeSpawner : MonoBehaviour {
 
     public void SpawnNode()
     {
-        var newNode = Instantiate(Node, transform.position, Quaternion.Euler(0,0,0));
+        var newNode = Instantiate(Node, transform.position-new Vector3(0,1.2f,0), Quaternion.Euler(-90,0,0));
         newNode.name = "node" + nodeNumber;
+        
         WorldAnchorManager.Instance.AttachAnchor(newNode, newNode.name);
+        //PathController pc = GameObject.Find("MixedRealityCamera").GetComponent<PathController>();
         nodeNumber++;
     }
 }

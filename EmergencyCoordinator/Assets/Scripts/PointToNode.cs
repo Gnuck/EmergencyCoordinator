@@ -24,4 +24,10 @@ public class PointToNode : MonoBehaviour {
     {
         targetNode = target;
     }
+
+    public void DeclineTarget()
+    {
+        targetNode = null;
+        transform.eulerAngles.Set(0f, 0f, 0f);
+    }
 }

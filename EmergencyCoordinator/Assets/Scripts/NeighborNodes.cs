@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class NeighborNodes : MonoBehaviour {
 
+    public List<GameObject> leftNodes;
+    public List<GameObject> rightNodes;
+
 	// Use this for initialization
 	void Start () {
 		
