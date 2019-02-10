@@ -19,6 +19,7 @@ public class PathController : MonoBehaviour {
 		
 	}
 
+    //Returns the closest game object(respresenting a node) to the user
     public GameObject FindClosestNode()
     {
         var userPos = transform.position;
@@ -42,7 +43,8 @@ public class PathController : MonoBehaviour {
         return closestNode;
     }
 
-    void RouteToNode()
+    //Given two nodes A and B, find the quickest path between them
+    void RouteToNode(GameObject startNode, GameObject destNode)
     {
 
     }
