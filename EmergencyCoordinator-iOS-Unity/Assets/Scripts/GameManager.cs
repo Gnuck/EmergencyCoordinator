@@ -15,7 +15,7 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	public void Send() {
-		GetComponent<Socket>().Send("asdfasd");
+		GetComponent<Socket>().Send("new web socket message");
 	}
 
 	public void Update() {
