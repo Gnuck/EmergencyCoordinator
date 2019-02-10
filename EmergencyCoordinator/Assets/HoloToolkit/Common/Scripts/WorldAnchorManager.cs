@@ -146,19 +146,23 @@ namespace HoloToolkit.Unity
             {
                 if (ShowDetailedLogs)
                 {
-                    Debug.LogFormat("[WorldAnchorManager] Successfully updated cached anchor \"{0}\".", anchor.name);
+                   /// //debug.logFormat("[WorldAnchorManager] Successfully updated cached anchor \"{0}\".", anchor.name);
                 }
 
                 if (AnchorDebugText != null)
                 {
+                    //for updating current text
                     AnchorDebugText.text += string.Format("\nSuccessfully updated cached anchor \"{0}\".", anchor.name);
+
+                    //for replacign current text
+                    AnchorDebugText.text = string.Format("\nSuccessfully updated cached anchor \"{0}\".", anchor.name);
                 }
             }
             else
             {
                 if (ShowDetailedLogs)
                 {
-                    Debug.LogFormat("[WorldAnchorManager] Failed to locate cached anchor \"{0}\", attempting to acquire anchor again.", anchor.name);
+                   // //debug.logFormat("[WorldAnchorManager] Failed to locate cached anchor \"{0}\", attempting to acquire anchor again.", anchor.name);
                 }
 
                 if (AnchorDebugText != null)
@@ -201,19 +205,19 @@ namespace HoloToolkit.Unity
         public string AttachAnchor(GameObject gameObjectToAnchor, string anchorName = null)
         {
 #if !UNITY_WSA || UNITY_EDITOR
-            Debug.LogWarning("World Anchor Manager does not work for this build. AttachAnchor will not be called.");
+            ////debug.logWarning("World Anchor Manager does not work for this build. AttachAnchor will not be called.");
             return null;
 #else
             if (gameObjectToAnchor == null)
             {
-                Debug.LogError("[WorldAnchorManager] Must pass in a valid gameObject");
+               // //debug.logError("[WorldAnchorManager] Must pass in a valid gameObject");
                 return null;
             }
 
             // This case is unexpected, but just in case.
             if (AnchorStore == null)
             {
-                Debug.LogWarning("[WorldAnchorManager] AttachAnchor called before anchor store is ready.");
+               // //debug.logWarning("[WorldAnchorManager] AttachAnchor called before anchor store is ready.");
             }
 
             anchorName = GenerateAnchorName(gameObjectToAnchor, anchorName);
@@ -239,7 +243,7 @@ namespace HoloToolkit.Unity
         {
             if (gameObjectToUnanchor == null)
             {
-                Debug.LogError("[WorldAnchorManager] Invalid GameObject! Try removing anchor by name.");
+               // //debug.logError("[WorldAnchorManager] Invalid GameObject! Try removing anchor by name.");
                 if (AnchorDebugText != null)
                 {
                     AnchorDebugText.text += "\nInvalid GameObject! Try removing anchor by name.";
@@ -259,7 +263,7 @@ namespace HoloToolkit.Unity
         {
             if (string.IsNullOrEmpty(anchorName))
             {
-                Debug.LogErrorFormat("[WorldAnchorManager] Invalid anchor \"{0}\"! Try removing anchor by GameObject.", anchorName);
+                //debug.logErrorFormat("[WorldAnchorManager] Invalid anchor \"{0}\"! Try removing anchor by GameObject.", anchorName);
                 if (AnchorDebugText != null)
                 {
                     AnchorDebugText.text += string.Format("\nInvalid anchor \"{0}\"! Try removing anchor by GameObject.", anchorName);
@@ -280,17 +284,17 @@ namespace HoloToolkit.Unity
         {
             if (string.IsNullOrEmpty(anchorName) && gameObjectToUnanchor == null)
             {
-                Debug.LogWarning("Invalid Remove Anchor Request!");
+                //debug.logWarning("Invalid Remove Anchor Request!");
                 return;
             }
 
 #if !UNITY_WSA || UNITY_EDITOR
-            Debug.LogWarning("World Anchor Manager does not work for this build. RemoveAnchor will not be called.");
+            //debug.logWarning("World Anchor Manager does not work for this build. RemoveAnchor will not be called.");
 #else
             // This case is unexpected, but just in case.
             if (AnchorStore == null)
             {
-                Debug.LogWarning("[WorldAnchorManager] RemoveAnchor called before anchor store is ready.");
+                //debug.logWarning("[WorldAnchorManager] RemoveAnchor called before anchor store is ready.");
             }
 
             LocalAnchorOperations.Enqueue(
@@ -309,14 +313,14 @@ namespace HoloToolkit.Unity
         public void RemoveAllAnchors()
         {
 #if !UNITY_WSA || UNITY_EDITOR
-            Debug.LogWarning("World Anchor Manager does not work for this build. RemoveAnchor will not be called.");
+            //debug.logWarning("World Anchor Manager does not work for this build. RemoveAnchor will not be called.");
 #else
             SpatialMappingManager spatialMappingManager = SpatialMappingManager.Instance;
 
             // This case is unexpected, but just in case.
             if (AnchorStore == null)
             {
-                Debug.LogWarning("[WorldAnchorManager] RemoveAllAnchors called before anchor store is ready.");
+                //debug.logWarning("[WorldAnchorManager] RemoveAllAnchors called before anchor store is ready.");
             }
 
             var anchors = FindObjectsOfType<WorldAnchor>();
@@ -333,7 +337,7 @@ namespace HoloToolkit.Unity
                 // Maybe they were created without using the WorldAnchorManager.
                 if (!AnchorGameObjectReferenceList.ContainsKey(anchors[i].name))
                 {
-                    Debug.LogWarning("[WorldAnchorManager] Removing an anchor that was created outside of the WorldAnchorManager.  Please use the WorldAnchorManager to create or delete anchors.");
+                    //debug.logWarning("[WorldAnchorManager] Removing an anchor that was created outside of the WorldAnchorManager.  Please use the WorldAnchorManager to create or delete anchors.");
                     if (AnchorDebugText != null)
                     {
                         AnchorDebugText.text += string.Format("\nRemoving an anchor that was created outside of the WorldAnchorManager.  Please use the WorldAnchorManager to create or delete anchors.");
@@ -365,7 +369,7 @@ namespace HoloToolkit.Unity
                 case AnchorOperation.Save:
                     if (anchoredGameObject == null)
                     {
-                        Debug.LogError("[WorldAnchorManager] The GameObject referenced must have been destroyed before we got a chance to anchor it.");
+                        //debug.logError("[WorldAnchorManager] The GameObject referenced must have been destroyed before we got a chance to anchor it.");
                         if (AnchorDebugText != null)
                         {
                             AnchorDebugText.text += "\nThe GameObject referenced must have been destroyed before we got a chance to anchor it.";
@@ -388,7 +392,7 @@ namespace HoloToolkit.Unity
                         {
                             if (ShowDetailedLogs)
                             {
-                                Debug.LogFormat("[WorldAnchorManager] Anchor could not be loaded for \"{0}\". Creating a new anchor.", anchoredGameObject.name);
+                                //debug.logFormat("[WorldAnchorManager] Anchor could not be loaded for \"{0}\". Creating a new anchor.", anchoredGameObject.name);
                             }
 
                             if (AnchorDebugText != null)
@@ -405,7 +409,7 @@ namespace HoloToolkit.Unity
                         savedAnchor.name = anchorId;
                         if (ShowDetailedLogs)
                         {
-                            Debug.LogFormat("[WorldAnchorManager] Anchor loaded from anchor store and updated for \"{0}\".", anchoredGameObject.name);
+                            //debug.logFormat("[WorldAnchorManager] Anchor loaded from anchor store and updated for \"{0}\".", anchoredGameObject.name);
                         }
 
                         if (AnchorDebugText != null)
@@ -419,7 +423,7 @@ namespace HoloToolkit.Unity
                 case AnchorOperation.Delete:
                     if (AnchorStore == null)
                     {
-                        Debug.LogError("[WorldAnchorManager] Remove anchor called before anchor store is ready.");
+                        //debug.logError("[WorldAnchorManager] Remove anchor called before anchor store is ready.");
                         break;
                     }
 
@@ -440,7 +444,7 @@ namespace HoloToolkit.Unity
                         }
                         else
                         {
-                            Debug.LogErrorFormat("[WorldAnchorManager] Unable remove WorldAnchor from {0}!", anchoredGameObject.name);
+                            //debug.logErrorFormat("[WorldAnchorManager] Unable remove WorldAnchor from {0}!", anchoredGameObject.name);
                             if (AnchorDebugText != null)
                             {
                                 AnchorDebugText.text += string.Format("\nUnable remove WorldAnchor from {0}!", anchoredGameObject.name);
@@ -449,7 +453,7 @@ namespace HoloToolkit.Unity
                     }
                     else
                     {
-                        Debug.LogError("[WorldAnchorManager] Unable find a GameObject to remove an anchor from!");
+                        //debug.logError("[WorldAnchorManager] Unable find a GameObject to remove an anchor from!");
                         if (AnchorDebugText != null)
                         {
                             AnchorDebugText.text += "\nUnable find a GameObject to remove an anchor from!";
@@ -463,7 +467,7 @@ namespace HoloToolkit.Unity
                     }
                     else
                     {
-                        Debug.LogError("[WorldAnchorManager] Unable find an anchor to delete!");
+                        //debug.logError("[WorldAnchorManager] Unable find an anchor to delete!");
                         if (AnchorDebugText != null)
                         {
                             AnchorDebugText.text += "\nUnable find an anchor to delete!";
@@ -509,12 +513,16 @@ namespace HoloToolkit.Unity
             {
                 if (ShowDetailedLogs)
                 {
-                    Debug.LogFormat("[WorldAnchorManager] Successfully saved anchor \"{0}\".", anchor.name);
+                    //debug.logFormat("[WorldAnchorManager] Successfully saved anchor \"{0}\".", anchor.name);
                 }
 
                 if (AnchorDebugText != null)
                 {
-                    AnchorDebugText.text += string.Format("\nSuccessfully saved anchor \"{0}\".", anchor.name);
+                    //for adding to current text
+                    //AnchorDebugText.text += string.Format("\nSuccessfully saved anchor \"{0}\".", anchor.name);
+
+                    //for replacing current text
+                    AnchorDebugText.text = string.Format("\nSuccessfully saved anchor \"{0}\".", anchor.name);
                 }
 
                 ExportAnchor(anchor);
@@ -522,7 +530,7 @@ namespace HoloToolkit.Unity
                 return true;
             }
 
-            Debug.LogErrorFormat("[WorldAnchorManager] Failed to save anchor \"{0}\"!", anchor.name);
+           // //debug.logErrorFormat("[WorldAnchorManager] Failed to save anchor \"{0}\"!", anchor.name);
 
             if (AnchorDebugText != null)
             {
@@ -539,7 +547,7 @@ namespace HoloToolkit.Unity
         {
             if (AnchorStore.Delete(anchorId))
             {
-                Debug.LogFormat("[WorldAnchorManager] Anchor {0} deleted successfully.", anchorId);
+                ////debug.logFormat("[WorldAnchorManager] Anchor {0} deleted successfully.", anchorId);
                 if (AnchorDebugText != null)
                 {
                     AnchorDebugText.text += string.Format("\nAnchor {0} deleted successfully.", anchorId);
@@ -552,7 +560,7 @@ namespace HoloToolkit.Unity
                     anchorId = "NULL";
                 }
 
-                Debug.LogErrorFormat("[WorldAnchorManager] Failed to delete \"{0}\".", anchorId);
+                ////debug.logErrorFormat("[WorldAnchorManager] Failed to delete \"{0}\".", anchorId);
                 if (AnchorDebugText != null)
                 {
                     AnchorDebugText.text += string.Format("\nFailed to delete \"{0}\".", anchorId);

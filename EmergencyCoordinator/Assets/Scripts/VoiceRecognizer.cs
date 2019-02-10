@@ -19,6 +19,7 @@ public class VoiceRecognizer : MonoBehaviour
     /// </summary>
     internal KeywordRecognizer keywordRecognizer;
 
+    public GameObject DirectionalIndicator;
     /// <summary>
     /// List of coffee Keywords registered
     /// </summary>
@@ -47,7 +48,7 @@ public class VoiceRecognizer : MonoBehaviour
             TextToSpeechManager.Instance.OnTest();
         });
 
-        _keywords.Add("Node", () =>
+        _keywords.Add("Drop Node", () =>
         {
             NodeSpawner.Instance.SpawnNode();
         });
@@ -58,12 +59,20 @@ public class VoiceRecognizer : MonoBehaviour
              TextToSpeechManager.Instance.ClearingAnchors();
          });
 
+        _keywords.Add("Next Node", () =>
+        {
+            TextToSpeechManager.Instance.FindingClosestNode();
+            GameObject closeNode = GetComponent<PathController>().FindClosestNode();
+            DirectionalIndicator.GetComponent<PointToNode>().AssignTarget(closeNode);
+
+        });
+
         //Create the keyword recognizer 
         keywordRecognizer = new KeywordRecognizer(_keywords.Keys.ToArray());
 
         // Register for the OnPhraseRecognized event 
         keywordRecognizer.OnPhraseRecognized += KeywordRecognizer_OnPhraseRecognized;
-        Debug.Log("voice recognizer started");
+        //Debug.Log("voice recognizer started");
         keywordRecognizer.Start();
     }
 

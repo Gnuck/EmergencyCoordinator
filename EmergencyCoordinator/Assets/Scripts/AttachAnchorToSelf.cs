@@ -7,7 +7,6 @@ public class AttachAnchorToSelf : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Debug.Log(transform.gameObject.name);
         AttachWorldAnchor();
 	}
 	

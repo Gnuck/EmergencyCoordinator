@@ -79,6 +79,17 @@ public class TextToSpeechManager : MonoBehaviour
         textToSpeech.StartSpeaking(msg);
     }
 
+    internal void FindingClosestNode()
+    {
+        string speakText = "Pointing to closest node";
+        //Create message
+        var msg = string.Format(
+            speakText, textToSpeech.Voice.ToString());
+
+        //speak message
+        textToSpeech.StartSpeaking(msg);
+    }
+
     internal void WaitingToProcessMesh()
     {
         string speakText = "Generating planes, reprocess in five seconds";

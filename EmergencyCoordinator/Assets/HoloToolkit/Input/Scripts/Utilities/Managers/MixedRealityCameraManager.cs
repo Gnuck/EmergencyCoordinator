@@ -95,7 +95,7 @@ namespace HoloToolkit.Unity.InputModule
 
         public void ApplySettingsForTransparentDisplay()
         {
-            Debug.Log("Display is Transparent");
+            //Debug.Log("Display is Transparent");
             CameraCache.Main.clearFlags = CameraClearFlags_TransparentDisplay;
             CameraCache.Main.backgroundColor = BackgroundColor_TransparentDisplay;
             CameraCache.Main.nearClipPlane = NearClipPlane_TransparentDisplay;
