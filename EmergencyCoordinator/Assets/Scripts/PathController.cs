@@ -43,10 +43,14 @@ public class PathController : MonoBehaviour {
         return closestNode;
     }
 
+ 
+
     //Given two nodes A and B, find the quickest path between them
     void RouteToNode(GameObject startNode, GameObject destNode)
     {
+        //create dictionary for every  node, setting values to infinity except startnode (0)
 
+        //get neighbors
     }
 
 }
