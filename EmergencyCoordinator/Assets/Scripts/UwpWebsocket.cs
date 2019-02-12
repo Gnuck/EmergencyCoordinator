@@ -3,6 +3,7 @@
 #endif
 #if CUSTOM_WEBSOCKET
 
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,7 @@ using Windows.Storage.Streams;			// DataWriter
 //	https://github.com/Microsoft/Windows-universal-samples/blob/master/Samples/WebSocket/cs/Scenario2_Binary.xaml.cs
 
 
-namespace WebSocketSharp
+namespace WebSocketSharp2
 {
 	public enum Opcode
 	{
@@ -85,7 +86,7 @@ namespace WebSocketSharp
 			//Debug.Log("UwpWebSocket::Constructor()");
 			url = TryGetUri( Url );
 			socket = new MessageWebSocket();
-			socket.MessageReceived += OnMessageRecieved;
+			socket.MessageReceived += MessageReceived;
 			socket.Closed += OnClosed;
 			MessageWriter = new DataWriter( socket.OutputStream );
 			SendLock = new System.Threading.Mutex();
@@ -104,9 +105,9 @@ namespace WebSocketSharp
 			}
 		}
 
-		void OnMessageRecieved(MessageWebSocket FromSocket, MessageWebSocketMessageReceivedEventArgs InputMessage)
+		void MessageReceived(MessageWebSocket FromSocket, MessageWebSocketMessageReceivedEventArgs InputMessage)
 		{
-			Debug.Log("UwpWebSocket::OnMessageRecieved()");
+			Debug.Log("UwpWebSocket::MessageRecieved()");
 
 			MessageEventArgs OutputMessage = null;
 
@@ -160,6 +161,7 @@ namespace WebSocketSharp
 
 		public void Send(byte[] data)
 		{
+            Debug.Log("sending byte");
 			lock(SendLock)
 			{
 				var SendTask = SendAsyncTask( data );
