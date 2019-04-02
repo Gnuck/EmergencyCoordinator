@@ -17,7 +17,7 @@ public class PathController : MonoBehaviour
     public Material selectedMat;
     public Material pastMat;
 
-    // Use this for initialization
+    //Use this for initialization
     void Start()
     {
 

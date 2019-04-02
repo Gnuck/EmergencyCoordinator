@@ -43,6 +43,7 @@ public class TextToSpeechManager : MonoBehaviour
             speakText, textToSpeech.Voice.ToString());
 
         //speak message
+        Debug.Log("YO");
         textToSpeech.StartSpeaking(msg);
     }
 

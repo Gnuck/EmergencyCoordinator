@@ -73,6 +73,7 @@ public class VoiceRecognizer : MonoBehaviour
 
         _keywords.Add("Target Node 0", () =>
         {
+            Debug.Log("TARGETING NODE 0");
             var pc = GetComponent<PathController>();
             var closeNode = pc.FindClosestNode();
 
