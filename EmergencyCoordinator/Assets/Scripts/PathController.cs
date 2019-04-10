@@ -9,7 +9,7 @@ public class PathController : MonoBehaviour
     public GameObject nextnode = null;
     private List<GameObject> followPath = new List<GameObject>();    
 
-    public List<GameObject> nodeNetwork;
+    //public List<GameObject> nodeNetwork;
 
     private static int pathStatus = 0;
 
@@ -45,8 +45,10 @@ public class PathController : MonoBehaviour
     }
 
     //find the node closest to the HMD/ user
-    public GameObject FindClosestNode()
+    public GameObject FindClosestNode(List<GameObject> nodeNetwork)
     {
+        Debug.Log("closest node in these nodes");
+        Debug.Log(nodeNetwork);
         var userPos = transform.position;
 
         //check if there are node points
@@ -64,10 +66,11 @@ public class PathController : MonoBehaviour
                 minDist = dist;
             }
         }
-
+        Debug.Log("closest node name");
+        Debug.Log(closestNode.name);
+        Debug.Log(closestNode.gameObject.name);
         return closestNode;
     }
-
 
     //void RouteToNode(GameObject startNode, GameObject endNode)
     //{

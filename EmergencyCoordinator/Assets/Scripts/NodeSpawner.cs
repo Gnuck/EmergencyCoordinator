@@ -29,7 +29,13 @@ public class NodeSpawner : MonoBehaviour {
         newNode.name = "node" + nodeNumber;
         
         WorldAnchorManager.Instance.AttachAnchor(newNode, newNode.name);
+        SetupManager.Instance.addNode(newNode);
         //PathController pc = GameObject.Find("MixedRealityCamera").GetComponent<PathController>();
         nodeNumber++;
+    }
+
+    public void resetNodeData()
+    {
+        nodeNumber = 0;
     }
 }

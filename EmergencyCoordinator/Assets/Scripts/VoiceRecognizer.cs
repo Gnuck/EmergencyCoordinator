@@ -57,8 +57,14 @@ public class VoiceRecognizer : MonoBehaviour
          {
              WorldAnchorManager.Instance.RemoveAllAnchors();
              TextToSpeechManager.Instance.ClearingAnchors();
-             List<GameObject> nodes = GetComponent<PathController>().nodeNetwork;
-             foreach(GameObject node in nodes)
+             //List<GameObject> nodes = GetComponent<PathController>().nodeNetwork;
+             //foreach(GameObject node in nodes)
+             //{
+             //    Destroy(node);
+             //}
+             List<GameObject> nodes = SetupManager.Instance.allNodes;
+             NodeSpawner.Instance.resetNodeData();
+             foreach (GameObject node in nodes)
              {
                  Destroy(node);
              }
@@ -66,18 +72,22 @@ public class VoiceRecognizer : MonoBehaviour
 
         _keywords.Add("Current Node", () =>
         {
+            var nodeNetwork = SetupManager.Instance.allNodes;
+            Debug.Log(nodeNetwork);
             TextToSpeechManager.Instance.FindingClosestNode();
-            GameObject closeNode = GetComponent<PathController>().FindClosestNode();
+            GameObject closeNode = GetComponent<PathController>().FindClosestNode(nodeNetwork);
             DirectionalIndicator.GetComponent<PointToNode>().AssignTarget(closeNode);
+            SetupManager.Instance.selectNode(closeNode);
         });
 
         _keywords.Add("Target Node 0", () =>
         {
             Debug.Log("TARGETING NODE 0");
             var pc = GetComponent<PathController>();
-            var closeNode = pc.FindClosestNode();
+            var nodeNetwork = SetupManager.Instance.allNodes;
+            var closeNode = pc.FindClosestNode(nodeNetwork);
 
-            var endNode = pc.nodeNetwork.Find(x => x.name =="node0");
+            var endNode = nodeNetwork.Find(x => x.name =="node0");
             var searchList = pc.SearchAllRoutes(closeNode, endNode);
             pc.InitPath(searchList);
         });
