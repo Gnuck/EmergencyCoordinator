@@ -88,8 +88,8 @@ public class VoiceRecognizer : MonoBehaviour
             var closeNode = pc.FindClosestNode(nodeNetwork);
 
             var endNode = nodeNetwork.Find(x => x.name =="node0");
-            var searchList = pc.SearchAllRoutes(closeNode, endNode);
-            pc.InitPath(searchList);
+            //var searchList = pc.SearchAllRoutes(closeNode, endNode);
+            //pc.InitPath(searchList);
         });
 
         _keywords.Add("Print something", () =>

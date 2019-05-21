@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PathController : MonoBehaviour
 {
-
+    public static PathController Instance;
     public GameObject currentNode = null;
     public GameObject nextnode = null;
     private List<GameObject> followPath = new List<GameObject>();    
@@ -17,6 +17,17 @@ public class PathController : MonoBehaviour
     public Material selectedMat;
     public Material pastMat;
 
+    private void Awake()
+    {
+        if (Instance != null & Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
     //Use this for initialization
     void Start()
     {
@@ -72,23 +83,24 @@ public class PathController : MonoBehaviour
         return closestNode;
     }
 
-    //void RouteToNode(GameObject startNode, GameObject endNode)
-    //{
-    // string startName = startNode.name;
-    //Dictionary<string, float> dict = new Dictionary<string, float>();
-    //List<GameObject> unvisitedNodes = new List<GameObject>(nodeNetwork);
-    //GameObject currentNode = unvisitedNodes.Find()
 
-    //}
+
+    void RouteToNode(GameObject startNode, GameObject endNode)
+    {
+        string startName = startNode.name;
+        Dictionary<string, float> dict = new Dictionary<string, float>();
+        //List<GameObject> unvisitedNodes = new List<GameObject>(nodeNetwork);
+        //GameObject currentNode = unvisitedNodes.Find()
+    }
 
     //greedy implementation of a path search
-    public List<GameObject> SearchAllRoutes(GameObject startNode, GameObject endNode)
+    public void SearchAllRoutes(GameObject startNode, GameObject endNode)
     {
-        var neighborNodes = startNode.GetComponent<NeighborNodes>();
-        if (neighborNodes.leftNodes.Contains(endNode))
-            return neighborNodes.leftNodes;
-        else
-            return neighborNodes.rightNodes;
+        //var neighborNodes = startNode.GetComponent<NeighborNodes>();
+        //if (neighborNodes.leftNodes.Contains(endNode))
+        //    return neighborNodes.leftNodes;
+        //else
+        //    return neighborNodes.rightNodes;
     }
 
     //Initialize a new path to guide the user through. 

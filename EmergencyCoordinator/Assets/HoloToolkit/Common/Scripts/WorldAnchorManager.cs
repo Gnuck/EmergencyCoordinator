@@ -204,10 +204,7 @@ namespace HoloToolkit.Unity
         /// <returns>The name of the newly attached anchor.</returns>
         public string AttachAnchor(GameObject gameObjectToAnchor, string anchorName = null)
         {
-#if !UNITY_WSA || UNITY_EDITOR
-            ////debug.logWarning("World Anchor Manager does not work for this build. AttachAnchor will not be called.");
-            return null;
-#else
+
             if (gameObjectToAnchor == null)
             {
                // //debug.logError("[WorldAnchorManager] Must pass in a valid gameObject");
@@ -231,8 +228,9 @@ namespace HoloToolkit.Unity
                 }
             );
 
+            Debug.Log("anchor name");
+            Debug.Log(anchorName);
             return anchorName;
-#endif
         }
 
         /// <summary>
