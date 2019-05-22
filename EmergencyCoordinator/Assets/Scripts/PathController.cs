@@ -85,11 +85,61 @@ public class PathController : MonoBehaviour
 
 
 
-    void RouteToNode(GameObject startNode, GameObject endNode)
+    public void RouteToNode(GameObject startNode, GameObject endNode)
     {
         string startName = startNode.name;
+        //dictionary if distances from the startNode
         Dictionary<string, float> dict = new Dictionary<string, float>();
-        //List<GameObject> unvisitedNodes = new List<GameObject>(nodeNetwork);
+        dict[startName] = 0.0f;
+        List<GameObject> unvisited = new List<GameObject>();
+        unvisited.AddRange(startNode.GetComponent<NeighborNodes>().neighbors);
+        Debug.Log("hmm");
+        //dict[] add to dict
+        foreach (GameObject node in unvisited)
+        {
+            Debug.Log(node.name);
+        }
+        unvisited.Sort((x,y) => dict[x.name].CompareTo(dict[y.name]));
+
+        Debug.Log("unvisited");
+        Debug.Log(unvisited);
+        foreach(GameObject node in unvisited)
+        {
+            Debug.Log(node.name);
+            Debug.Log(dict[node.name]);
+        }
+        //while(unvisited.Count>0)
+        //{
+        //    GameObject currentNode = unvisited[0];
+        //    int i = 0;
+        //    foreach (GameObject neighbor in currentNode.GetComponent<NeighborNodes>().neighbors)
+        //    {
+        //        string neighborName = neighbor.name;
+        //        float edgeScore = currentNode.GetComponent<NeighborNodes>().scores[i];
+        //        float currentVal = dict[currentNode.name];
+        //        float neighborScore = currentVal + edgeScore;
+
+        //        if (dict.ContainsKey(neighborName))
+        //        {
+        //            if(dict[neighborName] > neighborScore)
+        //            {
+
+        //            }
+        //            else
+        //            {
+        //                dict[neighborName] = neighborScore;
+        //                neighbor.GetComponent<NeighborNodes>().previous = currentNode;
+        //            }
+        //        } else
+        //        {
+
+        //            dict.Add(neighborName, neighborScore);
+        //            neighbor.GetComponent<NeighborNodes>().previous = currentNode;
+        //            searchQ.Enqueue(neighbor);
+        //        }
+        //        i++;
+        //    }
+        //}
         //GameObject currentNode = unvisitedNodes.Find()
     }
 

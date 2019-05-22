@@ -9,6 +9,7 @@ public class SetupManager : MonoBehaviour
     public static SetupManager Instance;
 
     public GameObject selectedNode;
+    public GameObject destNode;
     public List<GameObject> allNodes;
     public Material selectedMaterial;
     public Material networkMaterial;
@@ -127,4 +128,9 @@ public class SetupManager : MonoBehaviour
         selectNode(closestNode);
     }
 
+    public void getRoute(GameObject node)
+    {
+        destNode = node;
+        PathController.Instance.RouteToNode(selectedNode, destNode);
+    }
 }

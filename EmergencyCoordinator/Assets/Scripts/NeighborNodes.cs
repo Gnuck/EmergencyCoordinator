@@ -5,14 +5,18 @@ using UnityEngine;
 public class NeighborNodes : MonoBehaviour {
 
     public List<GameObject> neighbors;
+    public List<float> scores;
     public List<GameObject> visitedNeighbors;
     public List<GameObject> lineList;
+    public GameObject previous;
 
     private void Awake()
     {
         neighbors = new List<GameObject>();
+        scores = new List<float>();
         lineList = new List<GameObject>();
         visitedNeighbors = new List<GameObject>();
+        previous = null;
     }
     // Use this for initialization
     void Start () {
@@ -29,6 +33,8 @@ public class NeighborNodes : MonoBehaviour {
         if (!neighbors.Contains(node))
         {
             neighbors.Add(node);
+            float dist = Vector3.Distance(transform.position, node.transform.position);
+            scores.Add(dist);
             Debug.Log("added neighbor");
         }
         Debug.Log("neighbor already exists");
